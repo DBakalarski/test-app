@@ -1,0 +1,50 @@
+/**
+ * TODO: uzupełnij brakujące typy
+ */
+
+export type Breadcrumb = {
+  // TODO
+};
+
+export type Movie = {
+  title: string;
+  episode_id: number;
+  opening_crawl: string;
+  characters: string[];
+  url: string;
+};
+
+export type Character = {
+  name: string;
+  height: number;
+  mass: string;
+  birth_year: string;
+  films: string[];
+  url: string;
+};
+
+export type Reviews = {
+  movies: ReviewsInfo[];
+  characters: ReviewsInfo[];
+};
+
+export type ReviewItem = {
+  id: string;
+  text: string;
+  author: string;
+};
+
+export type ReviewsInfo = {
+  id: string;
+  reviews: ReviewItem[];
+};
+
+export type IFormInput = {
+  author: string;
+  text: string;
+};
+
+export enum ReviewType {
+  MOVIE = 'MOVIE',
+  CHARACTER = 'CHARACTER',
+}

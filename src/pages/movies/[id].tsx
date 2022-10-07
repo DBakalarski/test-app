@@ -1,39 +1,48 @@
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useMovie } from "../../actions";
-import styles from "../../styles/Layout.module.css";
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import { useMovie } from '../../actions';
+import { ReviewsContext } from '../../data/ReviewsProvides';
+import Form from '../../components/Form/Form';
+import { ReviewType } from '../../types';
+import Reviews from '../../components/Review/Reviews';
 
 const Movie: NextPage = () => {
-  const router = useRouter();
+  const { query, isReady } = useRouter();
+
+  if (!isReady) {
+    return <div> is Loading</div>;
+  }
+
+  const { moviesReviews } = useContext(ReviewsContext);
 
   /**
    * TODO: zaimplementuj hook do pobierania filmu
    */
-  const movie = useMovie(router.query.id);
+  const movie = useMovie();
+
+  console.log('reviewsMovie', moviesReviews);
+
+  const filteredReviews = moviesReviews?.filter((item) => item.id === query.id);
 
   return (
-    <div className={styles.container}>
-      <h3>Film: {movie.title}</h3>
-      <p>{movie.opening_crawl}</p>
-      <ul>
-        {movie.characters.map(() => {
-          /**
+    <div>
+      {movie && (
+        <>
+          <h3>Film: {movie.title}</h3>
+          <p>{movie.opening_crawl}</p>
+          {/**
            * TODO: dodaj listę postaci z linkami do strony o niej
-           */
-        })}
-      </ul>
-
-      <h3>Recenzje</h3>
-      <ul>
-        {/**
-         * TODO: dodaj listę recenzji dla zasobu, recenzje powinny być zapisane w stanie aplikacji
-         */}
-      </ul>
-      <form>
-        {/**
-         * TODO: zaimplementuj formularz dodawania recenzji
-         */}
-      </form>
+           */}
+          {/* <ul>
+            {movie.characters.map((item) => {
+              return <li>{item}</li>;
+            })}
+          </ul> */}
+          <Reviews reviews={filteredReviews} />
+          <Form type={ReviewType.MOVIE} />
+        </>
+      )}
     </div>
   );
 
