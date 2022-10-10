@@ -39,7 +39,7 @@ export type ReviewsInfo = {
   reviews: ReviewItem[];
 };
 
-export type IFormInput = {
+export type FormInput = {
   author: string;
   text: string;
 };

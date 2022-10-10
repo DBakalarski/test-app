@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ReviewsContext } from '../../data/ReviewsProvides';
-import { IFormInput, ReviewType } from '../../types';
+import { FormInput, ReviewType } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
 
 type FormProps = {
@@ -10,12 +10,12 @@ type FormProps = {
 };
 
 const Form: React.FC<FormProps> = ({ type }) => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { register, handleSubmit } = useForm<FormInput>();
   const { handleAddMovieReview, handleAddCharacterReview } =
     useContext(ReviewsContext);
   const { query } = useRouter();
 
-  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+  const onSubmit: SubmitHandler<FormInput> = (data) => {
     console.log(data);
     const reviewItem = {
       id: uuidv4(),
