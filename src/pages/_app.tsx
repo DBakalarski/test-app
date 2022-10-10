@@ -2,9 +2,9 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Head from 'next/head';
-import Link from 'next/link';
 import ReviewProvider from '../data/ReviewsProvides';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -21,9 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </ReviewProvider>
 
-      {/**
-       * TODO: powrót do poprzedniej strony jeśli nie jesteśmy aktualnie na stronie głównej
-       */}
       {!isHomePage && (
         <button type='button' onClick={() => router.back()}>
           Powrót
