@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import layout from '../../styles/Layout.module.css';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-} from '@chakra-ui/react';
+import { Breadcrumb, BreadcrumbItem } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-const Breadcrumbs: React.FC = () => {
+const Breadcrumbs = () => {
   const [breadcrumbs, setBreadcrumbs] = useState<any>();
   const router = useRouter();
-
-  console.log('router', router);
 
   useEffect(() => {
     const pathWithoutQuery = router.asPath.split('?')[0];
@@ -32,7 +24,6 @@ const Breadcrumbs: React.FC = () => {
 
     setBreadcrumbs(breadcrumbs);
   }, [router.asPath]);
-  const items: any[] = [];
 
   return (
     <>
@@ -47,18 +38,6 @@ const Breadcrumbs: React.FC = () => {
             </BreadcrumbItem>
           ))}
       </Breadcrumb>
-
-      <ul className={layout.breadcrumbs}>
-        <li>
-          <Link href='/'>Strona główna</Link>
-        </li>
-        {items.map(() => {
-          /**
-           * TODO: wyświetl linki do nawigacji po breadcrumbach
-           */
-          return <></>;
-        })}
-      </ul>
     </>
   );
 };

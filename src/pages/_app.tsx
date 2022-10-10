@@ -5,6 +5,9 @@ import Head from 'next/head';
 import ReviewProvider from '../data/ReviewsProvides';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Container } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -12,21 +15,26 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isHomePage = router.pathname === '/';
 
   return (
-    <>
+    <ChakraProvider>
       <Head>
-        <title>Strona główna</title>
+        <title>Home Page</title>
       </Head>
-      <Breadcrumbs />
-      <ReviewProvider>
-        <Component {...pageProps} />
-      </ReviewProvider>
-
-      {!isHomePage && (
-        <button type='button' onClick={() => router.back()}>
-          Powrót
-        </button>
-      )}
-    </>
+      <Container maxW='1200px'>
+        <Breadcrumbs />
+        <ReviewProvider>
+          <Component {...pageProps} />
+        </ReviewProvider>
+        {!isHomePage && (
+          <Button
+            colorScheme='teal'
+            variant='solid'
+            onClick={() => router.back()}
+          >
+            Back
+          </Button>
+        )}
+      </Container>
+    </ChakraProvider>
   );
 }
 

@@ -16,14 +16,7 @@ const Movie: NextPage = () => {
   }
 
   const { moviesReviews } = useContext(ReviewsContext);
-
-  /**
-   * TODO: zaimplementuj hook do pobierania filmu
-   */
   const movie = useMovie();
-
-  console.log('reviewsMovie', moviesReviews);
-
   const filteredReviews = moviesReviews?.filter((item) => item.id === query.id);
 
   return (
@@ -37,14 +30,6 @@ const Movie: NextPage = () => {
           <>
             <h3>Film: {movie.title}</h3>
             <p>{movie.opening_crawl}</p>
-            {/**
-             * TODO: dodaj listę postaci z linkami do strony o niej
-             */}
-            {/* <ul>
-            {movie.characters.map((item) => {
-              return <li>{item}</li>;
-            })}
-          </ul> */}
             <Reviews reviews={filteredReviews} />
             <Form type={ReviewType.MOVIE} />
           </>

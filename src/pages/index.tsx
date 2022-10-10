@@ -1,16 +1,15 @@
-import type { NextPage } from "next";
-import Link from "next/link";
-import styles from "../styles/Layout.module.css";
+import type { NextPage } from 'next';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
+    <div>
       <ul>
         <li>
-          <Link href="/movies">Filmy</Link>
+          <Link href='/movies'>Movie</Link>
         </li>
         <li>
-          <Link href="/characters">Postacie</Link>
+          <Link href='/characters'>Characters</Link>
         </li>
       </ul>
     </div>

@@ -42,6 +42,10 @@ export type ReviewsInfo = {
 export type FormInput = {
   author: string;
   text: string;
+  formState: {
+    errors: boolean;
+    isSubmitting: boolean;
+  };
 };
 
 export enum ReviewType {
