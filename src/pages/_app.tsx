@@ -9,12 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>
-          Zadanie testowe -
-          {/**
-           * TODO: Dodaj tytuł aktualnej strony
-           */}
-        </title>
+        <title>Strona główna</title>
       </Head>
       <Breadcrumbs />
       <ReviewProvider>

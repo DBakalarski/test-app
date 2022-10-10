@@ -3,14 +3,6 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import type { Movie, Character } from './types';
 
-/**
- * TODO: dodaj typy
- */
-async function fetchMethod(...args) {
-  const res = await fetch(...args);
-  return await res.json();
-}
-
 // docs: https://swapi.dev/
 const endpoint = 'https://swapi.dev/api';
 
@@ -23,15 +15,23 @@ export const getUrlID = (link: string) => {
 export const useMovies = () => {
   const [response, setResponse] = useState<Movie[] | undefined>(undefined);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   useEffect(() => {
-    /**
-     * TODO: moze da się jakoś lepiej pobierać dane :)
-     */
-    fetchMethod<{ results: Movie[] }>(`${endpoint}/films/`).then(
-      ({ results }) => {
-        setResponse(results);
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response: Movie[] = await axios.get(`${endpoint}/films/`);
+        console.log('response', response);
+
+        setResponse(response.data.results);
+      } catch (error) {
+        console.error('error');
       }
-    );
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   return response;
@@ -53,7 +53,7 @@ export const useMovie = () => {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const response: Movie = await axios.get(`${endpoint}/films/${id}`);
+        const response = await axios.get<Movie>(`${endpoint}/films/${id}`);
         setResponse(response.data);
       } catch (error) {
         console.error('error');
@@ -70,18 +70,23 @@ export const useMovie = () => {
 export const useCharacters = () => {
   const [response, setResponse] = useState<Character[] | undefined>(undefined);
 
-  /**
-   * TODO: ${endpoint}/people
-   */
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   useEffect(() => {
-    /**
-     * TODO: moze da się jakoś lepiej pobierać dane :)
-     */
-    fetchMethod<{ results: Character[] }>(`${endpoint}/people/`).then(
-      ({ results }) => {
-        setResponse(results);
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get<Character[]>(`${endpoint}/people/`);
+        console.log('response', response);
+
+        setResponse(response.data.results);
+      } catch (error) {
+        console.error('error');
       }
-    );
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   return response;

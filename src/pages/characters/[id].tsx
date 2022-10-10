@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { useCharacter } from '../../actions';
@@ -23,21 +24,27 @@ const Character: NextPage = () => {
   );
 
   return (
-    <div>
-      {character && (
-        <div>
-          <h3>Postać: {character.name}</h3>
-          <h3>Recenzje</h3>
-          <ul>
-            {filteredReviews[0]?.reviews.map((review) => {
-              return <div>{review.text}</div>;
-            })}
-            <Reviews reviews={filteredReviews} />
-          </ul>
-          <Form type={ReviewType.CHARACTER} />
-        </div>
-      )}
-    </div>
+    <>
+      <Head>
+        <title>Characters | {character?.name}</title>
+      </Head>
+
+      <div>
+        {character && (
+          <div>
+            <h3>Postać: {character.name}</h3>
+            <h3>Recenzje</h3>
+            <ul>
+              {filteredReviews[0]?.reviews.map((review) => {
+                return <div>{review.text}</div>;
+              })}
+              <Reviews reviews={filteredReviews} />
+            </ul>
+            <Form type={ReviewType.CHARACTER} />
+          </div>
+        )}
+      </div>
+    </>
   );
 
   //   return null;
