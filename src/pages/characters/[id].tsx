@@ -35,9 +35,6 @@ const Character: NextPage = () => {
             <h3>Postać: {character.name}</h3>
             <h3>Recenzje</h3>
             <ul>
-              {filteredReviews[0]?.reviews.map((review) => {
-                return <div>{review.text}</div>;
-              })}
               <Reviews reviews={filteredReviews} />
             </ul>
             <Form type={ReviewType.CHARACTER} />
@@ -47,7 +44,7 @@ const Character: NextPage = () => {
     </>
   );
 
-  //   return null;
+  return null;
 };
 
 export default Character;
