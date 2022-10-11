@@ -1,9 +1,6 @@
-/**
- * TODO: uzupełnij brakujące typy
- */
-
-export type Breadcrumb = {
-  // TODO
+export type Breadcrumbs = {
+  href: string;
+  label: string;
 };
 
 export type Movie = {
